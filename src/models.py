@@ -19,9 +19,10 @@ class User(db.Model):
         }
 
 
-class Favorites(db.Model):
+class Todos(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
+    done = db.Column(db.Boolean(), unique=False, nullable=False)
+    label = db.Column(db.String(120), unique=False, nullable=False)
 
     def __repr__(self):
         return '<User %r>' % self.name
@@ -29,6 +30,7 @@ class Favorites(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "name": self.name,
+            "done": self.done,
+            "label": self.label
             # do not serialize the password, its a security breach
         }
